@@ -71,6 +71,82 @@
             line-height: 1.6;
         }
 
+        /* Page Loader */
+        .page-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(135deg, var(--cream) 0%, #e8e4dc 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            transition: opacity 0.6s ease, visibility 0.6s ease;
+        }
+
+        .page-loader.fade-out {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-content {
+            text-align: center;
+            animation: fadeInScale 0.8s ease-out forwards;
+        }
+
+        .loader-logo {
+            max-width: 300px;
+            height: auto;
+            margin-bottom: 2rem;
+            animation: logoFloat 2s ease-in-out infinite;
+            filter: drop-shadow(0 10px 30px rgba(0,0,0,0.1));
+        }
+
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .loader-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: var(--stone-dark);
+            margin-bottom: 2rem;
+            letter-spacing: 0.1em;
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out 0.4s forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        .loader-bar {
+            width: 250px;
+            height: 3px;
+            background: rgba(184, 147, 111, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 0 auto;
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out 0.6s forwards;
+        }
+
+        .loader-progress {
+            height: 100%;
+            background: var(--gradient-gold);
+            width: 0;
+            border-radius: 10px;
+            animation: loadProgress 2s ease-out forwards;
+            box-shadow: 0 0 10px rgba(184, 147, 111, 0.5);
+        }
+
+        @keyframes loadProgress {
+            to { width: 100%; }
+        }
+
         /* Custom Cursor - only on pointer devices */
         @media (pointer: fine) and (hover: hover) {
             #cursor {
@@ -161,6 +237,18 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             transition: all var(--transition-base);
+        }
+
+        .logo-img {
+            height: 45px;
+            width: auto;
+            z-index: 1001;
+            transition: all var(--transition-base);
+            filter: brightness(0);
+        }
+
+        nav.scrolled .logo-img {
+            transform: scale(0.9);
         }
 
         nav.scrolled .logo {
@@ -1022,6 +1110,93 @@
             text-align: center;
         }
 
+        /* Portfolio Showcase */
+        .portfolio-section {
+            padding: 8rem var(--space-lg);
+            background: var(--pure-white);
+        }
+
+        .portfolio-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+        }
+
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all var(--transition-slow);
+        }
+
+        .portfolio-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .portfolio-large {
+            grid-row: span 2;
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(26, 22, 18, 0.95) 0%, transparent 100%);
+            padding: 2.5rem;
+            transform: translateY(100%);
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            transform: translateY(0);
+        }
+
+        .portfolio-overlay h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--pure-white);
+            margin-bottom: 0.5rem;
+        }
+
+        .portfolio-overlay p {
+            color: var(--accent-bronze-light);
+            letter-spacing: 0.08em;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 968px) {
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .portfolio-large {
+                grid-row: span 1;
+            }
+
+            .portfolio-item {
+                min-height: 300px;
+            }
+        }
+
         .partners-content {
             max-width: 1400px;
             margin: 0 auto;
@@ -1296,12 +1471,23 @@
     </style>
 </head>
 <body>
+    <!-- Welcome Loader -->
+    <div id="pageLoader" class="page-loader">
+        <div class="loader-content">
+            <img src="https://github.com/user-attachments/assets/b0755985-be3b-4210-a4c7-91851ea16342" alt="Concept By Realza Logo" class="loader-logo">
+            <div class="loader-text">Crafting Excellence</div>
+            <div class="loader-bar">
+                <div class="loader-progress"></div>
+            </div>
+        </div>
+    </div>
+
     <!-- Custom Cursor -->
     <div id="cursor" aria-hidden="true"></div>
 
     <!-- Navigation -->
     <nav id="navbar">
-        <div class="logo">CONCEPT BY REALZA</div>
+        <img src="https://github.com/user-attachments/assets/b0755985-be3b-4210-a4c7-91851ea16342" alt="Concept By Realza" class="logo-img">
         
         <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
             <span></span>
@@ -1390,7 +1576,7 @@
 
         <div class="products-grid">
             <article class="product-card">
-                <div class="product-image" style="background-image: linear-gradient(135deg, #d4cfc7 0%, #b8936f 100%);" role="img" aria-label="Kitchen countertop installation"></div>
+                <div class="product-image" style="background-image: url('https://github.com/user-attachments/assets/8996d772-9a7d-4dda-87ad-1eb34bfda62a');" role="img" aria-label="Kitchen countertop installation"></div>
                 <div class="product-content">
                     <h3 class="product-title">Kitchen Countertops</h3>
                     <p class="product-description">Seamless, non-porous surfaces that combine beauty with functionality. Custom fabrication for residential and commercial kitchens.</p>
@@ -1399,7 +1585,7 @@
             </article>
 
             <article class="product-card">
-                <div class="product-image" style="background-image: linear-gradient(135deg, #8a9a7b 0%, #d4cfc7 100%);" role="img" aria-label="Wall cladding installation"></div>
+                <div class="product-image" style="background-image: url('https://github.com/user-attachments/assets/b205b7eb-0eae-4f55-bd15-04c02ecab523');" role="img" aria-label="Wall cladding installation"></div>
                 <div class="product-content">
                     <h3 class="product-title">Wall Cladding</h3>
                     <p class="product-description">Architectural statement pieces that transform interiors. Backlit, textured, and custom-finished panels for unique environments.</p>
@@ -1408,7 +1594,7 @@
             </article>
 
             <article class="product-card">
-                <div class="product-image" style="background-image: linear-gradient(135deg, #b8936f 0%, #3d3832 100%);" role="img" aria-label="Custom furniture piece"></div>
+                <div class="product-image" style="background-image: url('https://github.com/user-attachments/assets/2dbf45fc-8044-a4c931a44e12');" role="img" aria-label="Custom furniture piece"></div>
                 <div class="product-content">
                     <h3 class="product-title">Custom Furniture</h3>
                     <p class="product-description">Bespoke reception desks, dining tables, and integrated furniture solutions. Precision CNC fabrication for complex geometries.</p>
@@ -1417,7 +1603,7 @@
             </article>
 
             <article class="product-card">
-                <div class="product-image" style="background-image: linear-gradient(135deg, #3d3832 0%, #8a9a7b 100%);" role="img" aria-label="Fabrication facility"></div>
+                <div class="product-image" style="background-image: url('https://github.com/user-attachments/assets/14db8da6-b988-4531-a241-a7c856e5a251');" role="img" aria-label="Fabrication facility"></div>
                 <div class="product-content">
                     <h3 class="product-title">Fabrication Services</h3>
                     <p class="product-description">End-to-end custom fabrication from digital design to installation. Specialized in complex curves, inlays, and thermoforming.</p>
@@ -1476,6 +1662,32 @@
         </div>
     </section>
 
+    <!-- Portfolio Showcase -->
+    <section class="portfolio-section">
+        <div class="section-header">
+            <div class="section-eyebrow">INSPIRATION</div>
+            <h2 class="section-title">Our Craftsmanship in Action</h2>
+            <p class="section-description">Discover how we transform spaces with precision-crafted Corian surfaces. Each project showcases our commitment to excellence and attention to detail.</p>
+        </div>
+
+        <div class="portfolio-grid">
+            <div class="portfolio-item portfolio-large">
+                <img src="https://github.com/user-attachments/assets/4f1ce530-6782-42ea-96a8-4c1c7ab7f3fb" alt="Premium Corian Installation" loading="lazy">
+                <div class="portfolio-overlay">
+                    <h3>Premium Surfaces</h3>
+                    <p>Luxury Residential Project</p>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <img src="https://github.com/user-attachments/assets/248e35e7-75eb-4901-be5e-5cf25b106bcb" alt="Modern Corian Design" loading="lazy">
+                <div class="portfolio-overlay">
+                    <h3>Modern Elegance</h3>
+                    <p>Commercial Space</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Partners Section -->
     <section id="partners" class="partners-section">
         <div class="partners-content">
@@ -1519,7 +1731,7 @@
     <footer id="contact">
         <div class="footer-content">
             <div class="footer-brand">
-                <h3>CONCEPT BY REALZA</h3>
+                <img src="https://github.com/user-attachments/assets/b0755985-be3b-4210-a4c7-91851ea16342" alt="Concept By Realza" style="height: 40px; width: auto; margin-bottom: 1.5rem; filter: brightness(0) invert(1);">
                 <p>Leading the future of architectural surfaces with precision manufacturing and innovative design solutions.</p>
                 <p style="margin-top: 2rem; font-size: 0.9rem;">📍 Manufacturing Units:<br>Mumbai | Delhi | Bangalore</p>
                 <p style="margin-top: 1rem;">📧 info@conceptbyrealza.com<br>📞 +91 88000 29291</p>
@@ -1659,7 +1871,7 @@
             });
         }, observerOptions);
 
-        document.querySelectorAll('.stat-item, .product-card, .partner-card, .visual-card').forEach(el => {
+        document.querySelectorAll('.stat-item, .product-card, .partner-card, .visual-card, .portfolio-item').forEach(el => {
             observer.observe(el);
         });
 
@@ -1703,6 +1915,17 @@
                 }
             });
         }
+
+        // Page Loader
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('pageLoader');
+            setTimeout(() => {
+                loader.classList.add('fade-out');
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                }, 600);
+            }, 2200); // Wait for animation to complete
+        });
     </script>
 </body>
 </html>
