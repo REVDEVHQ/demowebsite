@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APEX Surfaces — Premium Corian Manufacturing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --stone-dark: #1a1612;
+            --stone-medium: #3d3832;
+            --stone-light: #d4cfc7;
+            --cream: #f5f3f0;
+            --accent-bronze: #b8936f;
+            --accent-sage: #8a9a7b;
+            --pure-white: #ffffff;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            color: var(--stone-dark);
+            background: var(--cream);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Cursor */
+        body {
+            cursor: none;
+        }
+
+        #cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--accent-bronze);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 10000;
+            transition: transform 0.15s ease-out, width 0.3s, height 0.3s, border-color 0.3s;
+            mix-blend-mode: difference;
+        }
+
+        #cursor.hover {
+            width: 60px;
+            height: 60px;
+            border-color: var(--accent-sage);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 2rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: transparent;
+            transition: background 0.4s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(245, 243, 240, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 4rem;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 300;
+            letter-spacing: 0.1em;
+            color: var(--stone-dark);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--stone-medium);
+            font-size: 0.95rem;
+            letter-spacing: 0.05em;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent-bronze);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--stone-dark);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            padding: 0.8rem 1.8rem;
+            background: var(--stone-dark);
+            color: var(--cream);
+            border: none;
+            font-size: 0.9rem;
+            letter-spacing: 0.08em;
+            cursor: none;
+            transition: all 0.3s ease;
+        }
+
+        .nav-cta:hover {
+            background: var(--accent-bronze);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--cream) 0%, #e8e4dc 100%);
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.15;
+            background-image: 
+                radial-gradient(circle at 20% 50%, var(--accent-sage) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, var(--accent-bronze) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-20px, -20px) scale(1.1); }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            max-width: 1200px;
+            padding: 0 2rem;
+        }
+
+        .hero-eyebrow {
+            font-size: 0.9rem;
+            letter-spacing: 0.2em;
+            color: var(--stone-medium);
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.3s forwards;
+        }
+
+        .hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 5.5rem;
+            font-weight: 300;
+            line-height: 1.1;
+            color: var(--stone-dark);
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.5s forwards;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--stone-medium);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.7s forwards;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            gap: 2rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.9s forwards;
+        }
+
+        .btn-primary, .btn-secondary {
+            padding: 1.2rem 2.5rem;
+            font-size: 0.95rem;
+            letter-spacing: 0.08em;
+            text-decoration: none;
+            transition: all 0.4s ease;
+            cursor: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: var(--stone-dark);
+            color: var(--cream);
+            border: 2px solid var(--stone-dark);
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--accent-bronze);
+            transition: left 0.5s ease;
+            z-index: -1;
+        }
+
+        .btn-primary:hover::before {
+            left: 0;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--stone-dark);
+            border: 2px solid var(--stone-medium);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent-sage);
+            color: var(--accent-sage);
+            transform: translateY(-3px);
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 1.2s forwards;
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 60px;
+            background: linear-gradient(to bottom, transparent, var(--stone-medium));
+            animation: scrollPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollPulse {
+            0%, 100% { transform: translateY(0); opacity: 0.3; }
+            50% { transform: translateY(10px); opacity: 1; }
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: var(--stone-dark);
+            color: var(--cream);
+            padding: 5rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 4rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .stat-item {
+            text-align: center;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .stat-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stat-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4rem;
+            font-weight: 300;
+            color: var(--accent-bronze);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            color: var(--stone-light);
+        }
+
+        /* Products Section */
+        .products-section {
+            padding: 8rem 4rem;
+            background: var(--cream);
+        }
+
+        .section-header {
+            max-width: 1400px;
+            margin: 0 auto 5rem;
+            text-align: center;
+        }
+
+        .section-eyebrow {
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            color: var(--accent-bronze);
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            font-weight: 300;
+            color: var(--stone-dark);
+            margin-bottom: 1.5rem;
+        }
+
+        .section-description {
+            font-size: 1.1rem;
+            color: var(--stone-medium);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .products-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+        }
+
+        .product-card {
+            position: relative;
+            overflow: hidden;
+            background: var(--pure-white);
+            cursor: none;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.6s ease;
+        }
+
+        .product-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .product-image {
+            height: 400px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.6s ease;
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.05);
+        }
+
+        .product-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to bottom, transparent 50%, rgba(26, 22, 18, 0.7));
+        }
+
+        .product-content {
+            padding: 2.5rem;
+        }
+
+        .product-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 400;
+            color: var(--stone-dark);
+            margin-bottom: 1rem;
+        }
+
+        .product-description {
+            color: var(--stone-medium);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .product-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent-bronze);
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+            transition: gap 0.3s ease;
+        }
+
+        .product-link:hover {
+            gap: 1rem;
+        }
+
+        .product-link::after {
+            content: '→';
+            transition: transform 0.3s ease;
+        }
+
+        .product-link:hover::after {
+            transform: translateX(5px);
+        }
+
+        /* Manufacturing Section */
+        .manufacturing-section {
+            background: var(--stone-dark);
+            color: var(--cream);
+            padding: 8rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .manufacturing-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+        }
+
+        .manufacturing-content h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.5rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            line-height: 1.2;
+        }
+
+        .manufacturing-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--stone-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .capabilities-list {
+            list-style: none;
+            margin: 2rem 0;
+        }
+
+        .capabilities-list li {
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(212, 207, 199, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--stone-light);
+            letter-spacing: 0.05em;
+        }
+
+        .capabilities-list li::before {
+            content: '◆';
+            color: var(--accent-bronze);
+            font-size: 0.6rem;
+        }
+
+        .manufacturing-visual {
+            position: relative;
+            height: 600px;
+        }
+
+        .visual-card {
+            position: absolute;
+            background: var(--stone-medium);
+            border: 1px solid rgba(212, 207, 199, 0.2);
+            padding: 2rem;
+            transition: transform 0.4s ease;
+        }
+
+        .visual-card:nth-child(1) {
+            top: 0;
+            left: 0;
+            width: 60%;
+            height: 50%;
+            z-index: 3;
+        }
+
+        .visual-card:nth-child(2) {
+            top: 40%;
+            right: 0;
+            width: 55%;
+            height: 45%;
+            z-index: 2;
+        }
+
+        .visual-card:nth-child(3) {
+            bottom: 0;
+            left: 10%;
+            width: 50%;
+            height: 40%;
+            z-index: 1;
+        }
+
+        .visual-card:hover {
+            transform: scale(1.05) translateY(-10px);
+            z-index: 10;
+        }
+
+        .visual-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            color: var(--accent-bronze);
+            opacity: 0.5;
+        }
+
+        .visual-label {
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            color: var(--cream);
+            margin-top: 1rem;
+        }
+
+        /* Partners Section */
+        .partners-section {
+            padding: 8rem 4rem;
+            background: var(--cream);
+            text-align: center;
+        }
+
+        .partners-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4rem;
+            margin-top: 5rem;
+        }
+
+        .partner-card {
+            background: var(--pure-white);
+            padding: 3rem;
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .partner-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .partner-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+
+        .partner-icon {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .partner-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            color: var(--stone-dark);
+        }
+
+        .partner-card p {
+            color: var(--stone-medium);
+            line-height: 1.7;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--stone-dark);
+            color: var(--cream);
+            padding: 5rem 4rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.1em;
+        }
+
+        .footer-brand p {
+            color: var(--stone-light);
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            font-size: 0.9rem;
+            letter-spacing: 0.1em;
+            margin-bottom: 1.5rem;
+            color: var(--accent-bronze);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--stone-light);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--cream);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(212, 207, 199, 0.2);
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: var(--stone-light);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            nav {
+                padding: 1.5rem 2rem;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+            }
+
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 3rem;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .manufacturing-container {
+                grid-template-columns: 1fr;
+            }
+
+            .partners-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div id="cursor"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="logo">APEX</div>
+        <ul class="nav-links">
+            <li><a href="#products">Products</a></li>
+            <li><a href="#manufacturing">Manufacturing</a></li>
+            <li><a href="#partners">Partners</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button class="nav-cta">Partner With Us</button>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-background"></div>
+        <div class="hero-content">
+            <div class="hero-eyebrow">PREMIUM CORIAN MANUFACTURING</div>
+            <h1>Where Precision<br>Meets Artistry</h1>
+            <p class="hero-subtitle">Crafting architectural surfaces that transform spaces. From concept to installation, we bring your vision to life with unparalleled expertise.</p>
+            <div class="hero-cta">
+                <a href="#products" class="btn-primary">Explore Products</a>
+                <a href="#manufacturing" class="btn-secondary">Our Process</a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-line"></div>
+            <span style="font-size: 0.75rem; letter-spacing: 0.1em; color: var(--stone-medium);">SCROLL</span>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number">25+</div>
+                <div class="stat-label">YEARS EXPERIENCE</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">500+</div>
+                <div class="stat-label">PROJECTS COMPLETED</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">3</div>
+                <div class="stat-label">MANUFACTURING UNITS</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">150+</div>
+                <div class="stat-label">ARCHITECT PARTNERS</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="products-section">
+        <div class="section-header">
+            <div class="section-eyebrow">CAPABILITIES</div>
+            <h2 class="section-title">Comprehensive Corian Solutions</h2>
+            <p class="section-description">From residential elegance to commercial durability, our expertise spans every application of solid surface technology.</p>
+        </div>
+
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-image" style="background-image: linear-gradient(135deg, #d4cfc7 0%, #b8936f 100%);"></div>
+                <div class="product-content">
+                    <h3 class="product-title">Kitchen Countertops</h3>
+                    <p class="product-description">Seamless, non-porous surfaces that combine beauty with functionality. Custom fabrication for residential and commercial kitchens.</p>
+                    <a href="#" class="product-link">View Details</a>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image" style="background-image: linear-gradient(135deg, #8a9a7b 0%, #d4cfc7 100%);"></div>
+                <div class="product-content">
+                    <h3 class="product-title">Wall Cladding</h3>
+                    <p class="product-description">Architectural statement pieces that transform interiors. Backlit, textured, and custom-finished panels for unique environments.</p>
+                    <a href="#" class="product-link">View Details</a>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image" style="background-image: linear-gradient(135deg, #b8936f 0%, #3d3832 100%);"></div>
+                <div class="product-content">
+                    <h3 class="product-title">Custom Furniture</h3>
+                    <p class="product-description">Bespoke reception desks, dining tables, and integrated furniture solutions. Precision CNC fabrication for complex geometries.</p>
+                    <a href="#" class="product-link">View Details</a>
+                </div>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image" style="background-image: linear-gradient(135deg, #3d3832 0%, #8a9a7b 100%);"></div>
+                <div class="product-content">
+                    <h3 class="product-title">Fabrication Services</h3>
+                    <p class="product-description">End-to-end custom fabrication from digital design to installation. Specialized in complex curves, inlays, and thermoforming.</p>
+                    <a href="#" class="product-link">View Details</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Manufacturing Section -->
+    <section id="manufacturing" class="manufacturing-section">
+        <div class="manufacturing-container">
+            <div class="manufacturing-content">
+                <div class="section-eyebrow" style="color: var(--accent-bronze);">STATE-OF-THE-ART FACILITIES</div>
+                <h2>Precision Engineering<br>at Scale</h2>
+                <p>Our three manufacturing units across India combine traditional craftsmanship with cutting-edge CNC technology. Every piece is meticulously crafted to architect-grade specifications.</p>
+                
+                <ul class="capabilities-list">
+                    <li>Advanced 5-axis CNC Machining</li>
+                    <li>Thermoforming & 3D Shaping</li>
+                    <li>Seamless Joinery Technology</li>
+                    <li>Custom Color Matching Lab</li>
+                    <li>In-house Quality Assurance</li>
+                    <li>Nationwide Installation Network</li>
+                </ul>
+
+                <a href="#" class="btn-primary" style="margin-top: 2rem; display: inline-block;">Tour Our Facilities</a>
+            </div>
+
+            <div class="manufacturing-visual">
+                <div class="visual-card">
+                    <div class="visual-number">01</div>
+                    <div class="visual-label">DESIGN & ENGINEERING</div>
+                </div>
+                <div class="visual-card">
+                    <div class="visual-number">02</div>
+                    <div class="visual-label">PRECISION FABRICATION</div>
+                </div>
+                <div class="visual-card">
+                    <div class="visual-number">03</div>
+                    <div class="visual-label">QUALITY & FINISHING</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners Section -->
+    <section id="partners" class="partners-section">
+        <div class="partners-content">
+            <div class="section-header">
+                <div class="section-eyebrow">COLLABORATION</div>
+                <h2 class="section-title">Partner With Excellence</h2>
+                <p class="section-description">We collaborate with architects and designers to bring visionary projects to life. From concept to completion, we're your trusted manufacturing partner.</p>
+            </div>
+
+            <div class="partners-grid">
+                <div class="partner-card">
+                    <div class="partner-icon">📐</div>
+                    <h3>Design Support</h3>
+                    <p>Technical consultation, material selection guidance, and 3D visualization to refine your vision before fabrication begins.</p>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-icon">⚡</div>
+                    <h3>Fast Turnaround</h3>
+                    <p>Streamlined production workflows ensure project deadlines are met without compromising on quality or precision.</p>
+                </div>
+                <div class="partner-card">
+                    <div class="partner-icon">🏆</div>
+                    <h3>Premium Quality</h3>
+                    <p>ISO-certified processes, material certifications, and rigorous testing guarantee products that exceed industry standards.</p>
+                </div>
+            </div>
+
+            <div style="margin-top: 4rem;">
+                <a href="#" class="btn-primary">Become a Partner</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>APEX</h3>
+                <p>Leading the future of architectural surfaces with precision manufacturing and innovative design solutions.</p>
+                <p style="margin-top: 2rem; font-size: 0.9rem;">📍 Manufacturing Units: Mumbai | Delhi | Bangalore</p>
+            </div>
+            <div class="footer-section">
+                <h4>PRODUCTS</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Countertops</a></li>
+                    <li><a href="#">Wall Cladding</a></li>
+                    <li><a href="#">Furniture</a></li>
+                    <li><a href="#">Custom Fabrication</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>COMPANY</h4>
+                <ul class="footer-links">
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Manufacturing</a></li>
+                    <li><a href="#">Projects</a></li>
+                    <li><a href="#">Careers</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>CONNECT</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">Partner Program</a></li>
+                    <li><a href="#">Request Samples</a></li>
+                    <li><a href="#">Support</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 APEX Surfaces. All rights reserved.</p>
+            <p>Crafted with precision in India</p>
+        </div>
+    </footer>
+
+    <script>
+        // Custom Cursor
+        const cursor = document.getElementById('cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        // Cursor hover effect
+        const hoverElements = document.querySelectorAll('a, button, .product-card');
+        hoverElements.forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+        });
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements
+        document.querySelectorAll('.stat-item, .product-card, .partner-card').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Parallax effect for hero background
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero-background');
+            if (hero && scrolled < window.innerHeight) {
+                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+    </script>
+</body>
+</html>
