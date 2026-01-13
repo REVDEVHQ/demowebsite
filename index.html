@@ -3,24 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Concept By Realza - Premium Corian manufacturing for architects and designers. Custom countertops, wall cladding, furniture, and fabrication services with 25+ years of expertise.">
+    <meta name="description" content="Concept By Realza - Premium Corian manufacturing for architects and designers. Custom countertops, wall cladding, furniture, and fabrication services with 25+ years of expertise across India.">
+    <meta name="robots" content="index,follow">
+    <link rel="canonical" href="https://conceptbyrealza.com/">
     
     <!-- Open Graph -->
     <meta property="og:title" content="Concept By Realza — Premium Corian Manufacturing">
     <meta property="og:description" content="Architectural surfaces that transform spaces. Custom Corian fabrication for countertops, wall cladding, and furniture.">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="/og-image.jpg">
+    <meta property="og:url" content="https://conceptbyrealza.com/">
+    <meta property="og:image" content="https://conceptbyrealza.com/og-image.jpg">
     
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Concept By Realza — Premium Corian Manufacturing">
     <meta name="twitter:description" content="Architectural surfaces that transform spaces. Custom Corian fabrication for countertops, wall cladding, and furniture.">
+    <meta name="twitter:image" content="https://conceptbyrealza.com/og-image.jpg">
     
-    <title>Concept By Realza — Premium Corian Manufacturing</title>
+    <title>Concept By Realza — Premium Corian Manufacturing | Architects & Designers</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Concept By Realza",
+      "url": "https://conceptbyrealza.com",
+      "logo": "https://conceptbyrealza.com/logo.png",
+      "description": "Premium Corian manufacturing for architects and designers",
+      "address": [
+        {
+          "@type": "PostalAddress",
+          "addressLocality": "Mumbai",
+          "addressCountry": "IN"
+        },
+        {
+          "@type": "PostalAddress",
+          "addressLocality": "Delhi",
+          "addressCountry": "IN"
+        },
+        {
+          "@type": "PostalAddress",
+          "addressLocality": "Bangalore",
+          "addressCountry": "IN"
+        }
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+91-88000-29291",
+        "email": "info@conceptbyrealza.com",
+        "contactType": "Sales"
+      },
+      "sameAs": []
+    }
+    </script>
     
     <style>
         * {
@@ -43,21 +83,18 @@
             --gradient-gold: linear-gradient(135deg, #d4b490 0%, #b8936f 50%, #9a7954 100%);
             --gradient-sage: linear-gradient(135deg, #a8b89a 0%, #8a9a7b 100%);
             
-            /* Spacing scale */
             --space-xs: 0.5rem;
             --space-sm: 1rem;
             --space-md: 2rem;
             --space-lg: 4rem;
             --space-xl: 6rem;
             
-            /* Shadows */
             --shadow-sm: 0 2px 20px rgba(0,0,0,0.05);
             --shadow-md: 0 10px 40px rgba(0,0,0,0.08);
             --shadow-lg: 0 20px 60px rgba(0,0,0,0.1);
             --shadow-button: 0 4px 15px rgba(184, 147, 111, 0.3);
             --shadow-button-hover: 0 8px 25px rgba(184, 147, 111, 0.5);
             
-            /* Transitions */
             --transition-fast: 0.2s ease;
             --transition-base: 0.3s ease;
             --transition-slow: 0.6s ease;
@@ -69,6 +106,22 @@
             background: var(--cream);
             overflow-x: hidden;
             line-height: 1.6;
+        }
+
+        /* Skip to content link for accessibility */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--accent-bronze);
+            color: white;
+            padding: 8px;
+            text-decoration: none;
+            z-index: 10001;
+        }
+
+        .skip-link:focus {
+            top: 0;
         }
 
         /* Page Loader */
@@ -202,6 +255,26 @@
             outline-offset: 4px;
         }
 
+        /* Mobile Menu Overlay */
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            opacity: 0;
+            visibility: hidden;
+            transition: all var(--transition-base);
+            z-index: 999;
+        }
+
+        .menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
         /* Navigation */
         nav {
             position: fixed;
@@ -225,20 +298,6 @@
             border-bottom: 1px solid rgba(184, 147, 111, 0.1);
         }
 
-        .logo {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.4rem;
-            font-weight: 400;
-            letter-spacing: 0.12em;
-            color: var(--stone-dark);
-            z-index: 1001;
-            background: var(--gradient-gold);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            transition: all var(--transition-base);
-        }
-
         .logo-img {
             height: 45px;
             width: auto;
@@ -249,10 +308,6 @@
 
         nav.scrolled .logo-img {
             transform: scale(0.9);
-        }
-
-        nav.scrolled .logo {
-            transform: scale(0.95);
         }
 
         .nav-links {
@@ -267,7 +322,7 @@
         }
 
         .nav-links a,
-        .nav-links > li > span {
+        .nav-links button {
             text-decoration: none;
             color: var(--stone-medium);
             font-size: 0.95rem;
@@ -277,23 +332,27 @@
             padding: 0.8rem 1.2rem;
             display: block;
             border-radius: 8px;
+            background: none;
+            border: none;
+            font-family: inherit;
+            cursor: pointer;
         }
 
         .nav-links a:hover,
-        .nav-links > li > span:hover,
-        .nav-links a:focus-visible {
+        .nav-links button:hover,
+        .nav-links a:focus-visible,
+        .nav-links button:focus-visible {
             color: var(--stone-dark);
             background: rgba(184, 147, 111, 0.08);
             transform: translateY(-2px);
         }
 
-        /* Dropdown Menus */
+        /* Dropdown Menus - Fixed */
         .dropdown {
             position: relative;
         }
 
         .dropdown-toggle {
-            cursor: pointer;
             display: flex;
             align-items: center;
             gap: 0.4rem;
@@ -303,10 +362,6 @@
             content: '▾';
             font-size: 0.8rem;
             transition: transform var(--transition-base);
-        }
-
-        .dropdown:hover .dropdown-toggle::after {
-            transform: rotate(180deg);
         }
 
         .dropdown-menu {
@@ -326,11 +381,14 @@
             border: 1px solid rgba(184, 147, 111, 0.15);
         }
 
-        .dropdown:hover .dropdown-menu,
-        .dropdown:focus-within .dropdown-menu {
+        .dropdown.open .dropdown-menu {
             opacity: 1;
             visibility: visible;
             transform: translateY(0);
+        }
+
+        .dropdown.open .dropdown-toggle::after {
+            transform: rotate(180deg);
         }
 
         .dropdown-menu a {
@@ -342,7 +400,8 @@
             font-size: 0.9rem;
         }
 
-        .dropdown-menu a:hover {
+        .dropdown-menu a:hover,
+        .dropdown-menu a:focus-visible {
             background: var(--gradient-gold);
             color: var(--pure-white);
             transform: translateX(5px);
@@ -401,13 +460,6 @@
             box-shadow: var(--shadow-button-hover),
                         inset 0 1px 0 rgba(255,255,255,0.4),
                         inset 0 -2px 0 rgba(0,0,0,0.15);
-        }
-
-        .nav-cta:active {
-            transform: translateY(-1px);
-            box-shadow: 0 2px 10px rgba(184, 147, 111, 0.3),
-                        inset 0 1px 0 rgba(255,255,255,0.2),
-                        inset 0 1px 3px rgba(0,0,0,0.2);
         }
 
         /* Mobile Menu Toggle */
@@ -549,12 +601,13 @@
             display: inline-block;
             cursor: pointer;
             border-radius: 50px;
+            border: none;
+            font-family: inherit;
         }
 
         .btn-primary {
             background: var(--gradient-gold);
             color: var(--pure-white);
-            border: 2px solid transparent;
             box-shadow: var(--shadow-button),
                         inset 0 1px 0 rgba(255,255,255,0.3),
                         inset 0 -2px 0 rgba(0,0,0,0.1);
@@ -785,6 +838,7 @@
             position: relative;
             overflow: hidden;
             transition: transform var(--transition-slow);
+            background-color: var(--stone-light);
         }
 
         .product-card:hover .product-image {
@@ -1001,17 +1055,62 @@
             margin-top: var(--space-sm);
         }
 
-        /* CTA Section */
-        .cta-section {
-            background: var(--gradient-gold);
+        /* Trust & Quality Section */
+        .trust-section {
             padding: 6rem var(--space-lg);
-            text-align: center;
+            background: var(--pure-white);
+        }
+
+        .trust-grid {
+            max-width: 1400px;
+            margin: 3rem auto 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .trust-card {
+            padding: 2.5rem;
+            background: var(--cream);
+            border-radius: 16px;
+            border: 1px solid rgba(184, 147, 111, 0.2);
+            transition: all var(--transition-base);
+        }
+
+        .trust-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(184, 147, 111, 0.15);
+            border-color: var(--accent-bronze);
+        }
+
+        .trust-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .trust-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--stone-dark);
+        }
+
+        .trust-card p {
+            color: var(--stone-medium);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        /* Quote Form Section */
+        .quote-form-section {
+            padding: 8rem var(--space-lg);
+            background: linear-gradient(135deg, var(--accent-bronze) 0%, var(--accent-sage) 100%);
             color: var(--pure-white);
             position: relative;
             overflow: hidden;
         }
 
-        .cta-section::before {
+        .quote-form-section::before {
             content: '';
             position: absolute;
             top: -50%;
@@ -1027,87 +1126,107 @@
             50% { transform: translate(-30px, -30px); }
         }
 
-        .cta-content {
+        .quote-form-container {
             max-width: 800px;
             margin: 0 auto;
             position: relative;
             z-index: 2;
         }
 
-        .cta-content h2 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 300;
-            margin-bottom: var(--space-md);
+        .quote-form {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            margin-top: 3rem;
         }
 
-        .cta-content p {
-            font-size: 1.1rem;
-            margin-bottom: var(--space-md);
-            line-height: 1.8;
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
         }
 
-        .cta-buttons {
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--stone-dark);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.9rem 1.2rem;
+            border: 2px solid rgba(184, 147, 111, 0.2);
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: all var(--transition-base);
+            background: var(--pure-white);
+            color: var(--stone-dark);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-bronze);
+            box-shadow: 0 0 0 3px rgba(184, 147, 111, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-checkbox {
             display: flex;
-            gap: var(--space-md);
-            justify-content: center;
-            flex-wrap: wrap;
+            align-items: flex-start;
+            gap: 0.8rem;
+            margin: 1.5rem 0;
         }
 
-        .btn-light {
-            padding: 1.3rem 2.8rem;
-            background: var(--pure-white);
-            color: var(--stone-dark);
-            border: 2px solid var(--pure-white);
-            font-size: 0.95rem;
-            font-weight: 500;
-            letter-spacing: 0.08em;
-            text-decoration: none;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            display: inline-block;
-            border-radius: 50px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15),
-                        inset 0 1px 0 rgba(255,255,255,0.9);
+        .form-checkbox input[type="checkbox"] {
+            margin-top: 0.3rem;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
         }
 
-        .btn-light:hover,
-        .btn-light:focus-visible {
-            background: transparent;
+        .form-checkbox label {
+            font-size: 0.85rem;
+            color: var(--stone-medium);
+            line-height: 1.5;
+            cursor: pointer;
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 1.3rem;
+            background: var(--gradient-gold);
             color: var(--pure-white);
-            transform: translateY(-4px) scale(1.02);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.2),
-                        inset 0 1px 0 rgba(255,255,255,0.5);
-        }
-
-        .btn-outline-light {
-            padding: 1.3rem 2.8rem;
-            background: transparent;
-            color: var(--pure-white);
-            border: 2px solid var(--pure-white);
-            font-size: 0.95rem;
-            font-weight: 500;
-            letter-spacing: 0.08em;
-            text-decoration: none;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            display: inline-block;
+            border: none;
             border-radius: 50px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            cursor: pointer;
+            transition: all var(--transition-base);
+            box-shadow: 0 4px 20px rgba(184, 147, 111, 0.3);
         }
 
-        .btn-outline-light:hover,
-        .btn-outline-light:focus-visible {
-            background: var(--pure-white);
-            color: var(--stone-dark);
-            transform: translateY(-4px) scale(1.02);
-            box-shadow: 0 8px 30px rgba(255,255,255,0.3),
-                        inset 0 1px 0 rgba(255,255,255,0.9);
-        }
-
-        /* Partners Section */
-        .partners-section {
-            padding: 8rem var(--space-lg);
-            background: var(--cream);
-            text-align: center;
+        .form-submit:hover,
+        .form-submit:focus-visible {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(184, 147, 111, 0.5);
         }
 
         /* Portfolio Showcase */
@@ -1183,18 +1302,11 @@
             font-size: 0.9rem;
         }
 
-        @media (max-width: 968px) {
-            .portfolio-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .portfolio-large {
-                grid-row: span 1;
-            }
-
-            .portfolio-item {
-                min-height: 300px;
-            }
+        /* Partners Section */
+        .partners-section {
+            padding: 8rem var(--space-lg);
+            background: var(--cream);
+            text-align: center;
         }
 
         .partners-content {
@@ -1315,16 +1427,11 @@
             margin-bottom: 3rem;
         }
 
-        .footer-brand h3 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2rem;
-            font-weight: 300;
+        .footer-brand img {
+            height: 40px;
+            width: auto;
             margin-bottom: 1.5rem;
-            letter-spacing: 0.12em;
-            background: var(--gradient-gold);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            filter: brightness(0) invert(1);
         }
 
         .footer-brand p {
@@ -1393,6 +1500,7 @@
                 box-shadow: -5px 0 30px rgba(0,0,0,0.2);
                 transition: right var(--transition-base);
                 overflow-y: auto;
+                z-index: 1000;
             }
 
             .nav-links.active {
@@ -1400,10 +1508,12 @@
             }
 
             .nav-links a,
-            .nav-links > li > span {
+            .nav-links button {
                 padding: 1rem;
                 border-radius: 0;
                 border-bottom: 1px solid rgba(184, 147, 111, 0.1);
+                width: 100%;
+                text-align: left;
             }
 
             .dropdown-menu {
@@ -1415,6 +1525,11 @@
                 margin-top: 0;
                 border: none;
                 background: rgba(184, 147, 111, 0.05);
+                display: none;
+            }
+
+            .dropdown.open .dropdown-menu {
+                display: block;
             }
 
             .dropdown-menu a {
@@ -1445,16 +1560,28 @@
                 height: auto !important;
                 margin-bottom: var(--space-md);
             }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .portfolio-large {
+                grid-row: span 1;
+            }
+
+            .portfolio-item {
+                min-height: 300px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
         }
 
         @media (max-width: 640px) {
             .hero-cta {
                 flex-direction: column;
                 gap: var(--space-sm);
-            }
-
-            .cta-buttons {
-                flex-direction: column;
             }
         }
 
@@ -1471,6 +1598,9 @@
     </style>
 </head>
 <body>
+    <!-- Skip to content link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
     <!-- Welcome Loader -->
     <div id="pageLoader" class="page-loader">
         <div class="loader-content">
@@ -1485,35 +1615,38 @@
     <!-- Custom Cursor -->
     <div id="cursor" aria-hidden="true"></div>
 
+    <!-- Mobile Menu Overlay -->
+    <div class="menu-overlay" id="menuOverlay"></div>
+
     <!-- Navigation -->
-    <nav id="navbar">
+    <nav id="navbar" role="navigation" aria-label="Main navigation">
         <img src="https://github.com/user-attachments/assets/b0755985-be3b-4210-a4c7-91851ea16342" alt="Concept By Realza" class="logo-img">
         
-        <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false" id="menuToggle">
             <span></span>
             <span></span>
             <span></span>
         </button>
 
-        <ul class="nav-links">
+        <ul class="nav-links" id="navLinks">
             <li class="dropdown nav-item">
-                <span class="dropdown-toggle" tabindex="0">Products</span>
-                <div class="dropdown-menu">
-                    <a href="#products">All Products</a>
-                    <a href="#products">Kitchen Countertops</a>
-                    <a href="#products">Wall Cladding</a>
-                    <a href="#products">Custom Furniture</a>
-                    <a href="#products">Fabrication Services</a>
+                <button class="dropdown-toggle" type="button" aria-expanded="false" aria-haspopup="true">Products</button>
+                <div class="dropdown-menu" role="menu">
+                    <a href="#products" role="menuitem">All Products</a>
+                    <a href="#products" role="menuitem">Kitchen Countertops</a>
+                    <a href="#products" role="menuitem">Wall Cladding</a>
+                    <a href="#products" role="menuitem">Custom Furniture</a>
+                    <a href="#products" role="menuitem">Fabrication Services</a>
                 </div>
             </li>
             <li class="dropdown nav-item">
-                <span class="dropdown-toggle" tabindex="0">Company</span>
-                <div class="dropdown-menu">
-                    <a href="#manufacturing">About Us</a>
-                    <a href="#manufacturing">Manufacturing</a>
-                    <a href="#partners">Our Process</a>
-                    <a href="#partners">Quality Standards</a>
-                    <a href="#contact">Contact</a>
+                <button class="dropdown-toggle" type="button" aria-expanded="false" aria-haspopup="true">Company</button>
+                <div class="dropdown-menu" role="menu">
+                    <a href="#manufacturing" role="menuitem">About Us</a>
+                    <a href="#manufacturing" role="menuitem">Manufacturing</a>
+                    <a href="#trust" role="menuitem">Quality & Certifications</a>
+                    <a href="#partners" role="menuitem">Our Process</a>
+                    <a href="#contact" role="menuitem">Contact</a>
                 </div>
             </li>
             <li class="nav-item"><a href="#partners">Partners</a></li>
@@ -1525,213 +1658,310 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-background-wrapper">
-            <div class="hero-background" id="heroBackground"></div>
-        </div>
-        <div class="hero-content">
-            <div class="hero-eyebrow">PREMIUM CORIAN MANUFACTURING</div>
-            <h1>Where Precision<br>Meets Artistry</h1>
-            <p class="hero-subtitle">Crafting architectural surfaces that transform spaces. From concept to installation, we bring your vision to life with unparalleled expertise.</p>
-            <div class="hero-cta">
-                <a href="#products" class="btn-primary">Explore Products</a>
-                <a href="#manufacturing" class="btn-secondary">Our Process</a>
+    <main id="main-content">
+        <section class="hero">
+            <div class="hero-background-wrapper">
+                <div class="hero-background" id="heroBackground"></div>
             </div>
-        </div>
-        <div class="scroll-indicator">
-            <div class="scroll-line"></div>
-            <span style="font-size: 0.75rem; letter-spacing: 0.1em; color: var(--accent-bronze);">SCROLL</span>
-        </div>
-    </section>
-
-    <!-- Stats Section -->
-    <section class="stats-section">
-        <div class="stats-grid">
-            <div class="stat-item">
-                <div class="stat-number">25+</div>
-                <div class="stat-label">YEARS EXPERIENCE</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number">500+</div>
-                <div class="stat-label">PROJECTS COMPLETED</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number">3</div>
-                <div class="stat-label">MANUFACTURING UNITS</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number">150+</div>
-                <div class="stat-label">ARCHITECT PARTNERS</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Products Section -->
-    <section id="products" class="products-section">
-        <div class="section-header">
-            <div class="section-eyebrow">CAPABILITIES</div>
-            <h2 class="section-title">Comprehensive Corian Solutions</h2>
-            <p class="section-description">From residential elegance to commercial durability, our expertise spans every application of solid surface technology.</p>
-        </div>
-
-        <div class="products-grid">
-            <article class="product-card">
-                <div class="product-image" style="background-image: url('https://github.com/user-attachments/assets/8996d772-9a7d-4dda-87ad-1eb34bfda62a');" role="img" aria-label="Kitchen countertop installation"></div>
-                <div class="product-content">
-                    <h3 class="product-title">Kitchen Countertops</h3>
-                    <p class="product-description">Seamless, non-porous surfaces that combine beauty with functionality. Custom fabrication for residential and commercial kitchens.</p>
-                    <a href="#quote" class="product-link">Request Quote</a>
-                </div>
-            </article>
-
-            <article class="product-card">
-                <div class="product-image" style="background-image: url('https://github.com/user-attachments/assets/b205b7eb-0eae-4f55-bd15-04c02ecab523');" role="img" aria-label="Wall cladding installation"></div>
-                <div class="product-content">
-                    <h3 class="product-title">Wall Cladding</h3>
-                    <p class="product-description">Architectural statement pieces that transform interiors. Backlit, textured, and custom-finished panels for unique environments.</p>
-                    <a href="#quote" class="product-link">Request Quote</a>
-                </div>
-            </article>
-
-            <article class="product-card">
-                <div class="product-image" style="background-image: url('https://github.com/user-attachments/assets/2dbf45fc-8044-a4c931a44e12');" role="img" aria-label="Custom furniture piece"></div>
-                <div class="product-content">
-                    <h3 class="product-title">Custom Furniture</h3>
-                    <p class="product-description">Bespoke reception desks, dining tables, and integrated furniture solutions. Precision CNC fabrication for complex geometries.</p>
-                    <a href="#quote" class="product-link">Request Quote</a>
-                </div>
-            </article>
-
-            <article class="product-card">
-                <div class="product-image" style="background-image: url('https://github.com/user-attachments/assets/14db8da6-b988-4531-a241-a7c856e5a251');" role="img" aria-label="Fabrication facility"></div>
-                <div class="product-content">
-                    <h3 class="product-title">Fabrication Services</h3>
-                    <p class="product-description">End-to-end custom fabrication from digital design to installation. Specialized in complex curves, inlays, and thermoforming.</p>
-                    <a href="#quote" class="product-link">Request Quote</a>
-                </div>
-            </article>
-        </div>
-    </section>
-
-    <!-- Manufacturing Section -->
-    <section id="manufacturing" class="manufacturing-section">
-        <div class="manufacturing-container">
-            <div class="manufacturing-content">
-                <div class="section-eyebrow" style="color: var(--accent-bronze);">STATE-OF-THE-ART FACILITIES</div>
-                <h2>Precision Engineering<br>at Scale</h2>
-                <p>Our three manufacturing units across India combine traditional craftsmanship with cutting-edge CNC technology. Every piece is meticulously crafted to architect-grade specifications.</p>
-                
-                <ul class="capabilities-list">
-                    <li>Advanced 5-axis CNC Machining</li>
-                    <li>Thermoforming & 3D Shaping</li>
-                    <li>Seamless Joinery Technology</li>
-                    <li>Custom Color Matching Lab</li>
-                    <li>In-house Quality Assurance</li>
-                    <li>Nationwide Installation Network</li>
-                </ul>
-
-                <a href="#quote" class="btn-primary" style="margin-top: 2rem; display: inline-block;">Request Facility Tour</a>
-            </div>
-
-            <div class="manufacturing-visual">
-                <div class="visual-card" tabindex="0">
-                    <div class="visual-number">01</div>
-                    <div class="visual-label">DESIGN & ENGINEERING</div>
-                </div>
-                <div class="visual-card" tabindex="0">
-                    <div class="visual-number">02</div>
-                    <div class="visual-label">PRECISION FABRICATION</div>
-                </div>
-                <div class="visual-card" tabindex="0">
-                    <div class="visual-number">03</div>
-                    <div class="visual-label">QUALITY & FINISHING</div>
+            <div class="hero-content">
+                <div class="hero-eyebrow">PREMIUM CORIAN MANUFACTURING</div>
+                <h1>Where Precision<br>Meets Artistry</h1>
+                <p class="hero-subtitle">Crafting architectural surfaces that transform spaces. From concept to installation, we bring your vision to life with unparalleled expertise.</p>
+                <div class="hero-cta">
+                    <a href="#products" class="btn-primary">Explore Products</a>
+                    <a href="#manufacturing" class="btn-secondary">Our Process</a>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section id="quote" class="cta-section">
-        <div class="cta-content">
-            <h2>Ready to Start Your Project?</h2>
-            <p>Whether you're an architect with a vision or a designer seeking the perfect surface, we're here to collaborate. Get samples, request a quote, or schedule a consultation with our team.</p>
-            <div class="cta-buttons">
-                <a href="mailto:info@conceptbyrealza.com" class="btn-light">Request Samples</a>
-                <a href="tel:+918800029291" class="btn-outline-light">Call: +91 88000 29291</a>
+            <div class="scroll-indicator">
+                <div class="scroll-line"></div>
+                <span style="font-size: 0.75rem; letter-spacing: 0.1em; color: var(--accent-bronze);">SCROLL</span>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Portfolio Showcase -->
-    <section class="portfolio-section">
-        <div class="section-header">
-            <div class="section-eyebrow">INSPIRATION</div>
-            <h2 class="section-title">Our Craftsmanship in Action</h2>
-            <p class="section-description">Discover how we transform spaces with precision-crafted Corian surfaces. Each project showcases our commitment to excellence and attention to detail.</p>
-        </div>
-
-        <div class="portfolio-grid">
-            <div class="portfolio-item portfolio-large">
-                <img src="https://github.com/user-attachments/assets/4f1ce530-6782-42ea-96a8-4c1c7ab7f3fb" alt="Premium Corian Installation" loading="lazy">
-                <div class="portfolio-overlay">
-                    <h3>Premium Surfaces</h3>
-                    <p>Luxury Residential Project</p>
+        <!-- Stats Section -->
+        <section class="stats-section" aria-label="Company statistics">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">25+</div>
+                    <div class="stat-label">YEARS EXPERIENCE</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">PROJECTS COMPLETED</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">MANUFACTURING UNITS</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">150+</div>
+                    <div class="stat-label">ARCHITECT PARTNERS</div>
                 </div>
             </div>
-            <div class="portfolio-item">
-                <img src="https://github.com/user-attachments/assets/248e35e7-75eb-4901-be5e-5cf25b106bcb" alt="Modern Corian Design" loading="lazy">
-                <div class="portfolio-overlay">
-                    <h3>Modern Elegance</h3>
-                    <p>Commercial Space</p>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Partners Section -->
-    <section id="partners" class="partners-section">
-        <div class="partners-content">
+        <!-- Products Section -->
+        <section id="products" class="products-section">
             <div class="section-header">
-                <div class="section-eyebrow">COLLABORATION</div>
-                <h2 class="section-title">Partner With Excellence</h2>
-                <p class="section-description">We collaborate with architects and designers to bring visionary projects to life. From concept to completion, we're your trusted manufacturing partner.</p>
+                <div class="section-eyebrow">CAPABILITIES</div>
+                <h2 class="section-title">Comprehensive Corian Solutions</h2>
+                <p class="section-description">From residential elegance to commercial durability, our expertise spans every application of solid surface technology.</p>
             </div>
 
-            <div class="partners-grid">
-                <article class="partner-card">
-                    <div class="partner-icon" aria-hidden="true">📐</div>
-                    <h3>Design Support</h3>
-                    <p>Technical consultation, material selection guidance, and 3D visualization to refine your vision before fabrication begins.</p>
+            <div class="products-grid">
+                <article class="product-card">
+                    <div class="product-image" data-bg="https://github.com/user-attachments/assets/8996d772-9a7d-4dda-87ad-1eb34bfda62a" role="img" aria-label="Kitchen countertop installation"></div>
+                    <div class="product-content">
+                        <h3 class="product-title">Kitchen Countertops</h3>
+                        <p class="product-description">Seamless, non-porous surfaces that combine beauty with functionality. Custom fabrication for residential and commercial kitchens.</p>
+                        <a href="#quote" class="product-link">Request Quote</a>
+                    </div>
                 </article>
-                <article class="partner-card">
-                    <div class="partner-icon" aria-hidden="true">⚡</div>
-                    <h3>Fast Turnaround</h3>
-                    <p>Streamlined production workflows ensure project deadlines are met without compromising on quality or precision.</p>
+
+                <article class="product-card">
+                    <div class="product-image" data-bg="https://github.com/user-attachments/assets/b205b7eb-0eae-4f55-bd15-04c02ecab523" role="img" aria-label="Wall cladding installation"></div>
+                    <div class="product-content">
+                        <h3 class="product-title">Wall Cladding</h3>
+                        <p class="product-description">Architectural statement pieces that transform interiors. Backlit, textured, and custom-finished panels for unique environments.</p>
+                        <a href="#quote" class="product-link">Request Quote</a>
+                    </div>
                 </article>
-                <article class="partner-card">
-                    <div class="partner-icon" aria-hidden="true">🏆</div>
-                    <h3>Premium Quality</h3>
-                    <p>ISO-certified processes, material certifications, and rigorous testing guarantee products that exceed industry standards.</p>
+
+                <article class="product-card">
+                    <div class="product-image" data-bg="https://github.com/user-attachments/assets/2dbf45fc-8044-a4c931a44e12" role="img" aria-label="Custom furniture piece"></div>
+                    <div class="product-content">
+                        <h3 class="product-title">Custom Furniture</h3>
+                        <p class="product-description">Bespoke reception desks, dining tables, and integrated furniture solutions. Precision CNC fabrication for complex geometries.</p>
+                        <a href="#quote" class="product-link">Request Quote</a>
+                    </div>
+                </article>
+
+                <article class="product-card">
+                    <div class="product-image" data-bg="https://github.com/user-attachments/assets/14db8da6-b988-4531-a241-a7c856e5a251" role="img" aria-label="Fabrication facility"></div>
+                    <div class="product-content">
+                        <h3 class="product-title">Fabrication Services</h3>
+                        <p class="product-description">End-to-end custom fabrication from digital design to installation. Specialized in complex curves, inlays, and thermoforming.</p>
+                        <a href="#quote" class="product-link">Request Quote</a>
+                    </div>
                 </article>
             </div>
+        </section>
 
-            <div class="certifications">
-                <h3>Certifications & Partnerships</h3>
-                <div class="cert-badges">
-                    <span class="cert-badge">ISO 9001:2015 Certified</span>
-                    <span class="cert-badge">DuPont™ Corian® Authorized Fabricator</span>
-                    <span class="cert-badge">IGBC Member</span>
-                    <span class="cert-badge">Made in India</span>
+        <!-- Manufacturing Section -->
+        <section id="manufacturing" class="manufacturing-section">
+            <div class="manufacturing-container">
+                <div class="manufacturing-content">
+                    <div class="section-eyebrow" style="color: var(--accent-bronze);">STATE-OF-THE-ART FACILITIES</div>
+                    <h2>Precision Engineering<br>at Scale</h2>
+                    <p>Our three manufacturing units across India combine traditional craftsmanship with cutting-edge CNC technology. Every piece is meticulously crafted to architect-grade specifications.</p>
+                    
+                    <ul class="capabilities-list">
+                        <li>Advanced 5-axis CNC Machining</li>
+                        <li>Thermoforming & 3D Shaping</li>
+                        <li>Seamless Joinery Technology</li>
+                        <li>Custom Color Matching Lab</li>
+                        <li>In-house Quality Assurance</li>
+                        <li>Nationwide Installation Network</li>
+                    </ul>
+
+                    <a href="#quote" class="btn-primary" style="margin-top: 2rem; display: inline-block;">Request Facility Tour</a>
+                </div>
+
+                <div class="manufacturing-visual">
+                    <div class="visual-card" tabindex="0">
+                        <div class="visual-number">01</div>
+                        <div class="visual-label">DESIGN & ENGINEERING</div>
+                    </div>
+                    <div class="visual-card" tabindex="0">
+                        <div class="visual-number">02</div>
+                        <div class="visual-label">PRECISION FABRICATION</div>
+                    </div>
+                    <div class="visual-card" tabindex="0">
+                        <div class="visual-number">03</div>
+                        <div class="visual-label">QUALITY & FINISHING</div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <!-- Trust & Quality Section -->
+        <section id="trust" class="trust-section">
+            <div class="section-header">
+                <div class="section-eyebrow">QUALITY ASSURANCE</div>
+                <h2 class="section-title">Built on Trust & Excellence</h2>
+                <p class="section-description">Our commitment to quality goes beyond manufacturing. Every project is backed by industry-leading certifications and comprehensive support.</p>
+            </div>
+
+            <div class="trust-grid">
+                <div class="trust-card">
+                    <div class="trust-icon" aria-hidden="true">🏅</div>
+                    <h3>Certifications</h3>
+                    <p>ISO 9001:2015 certified manufacturing processes. DuPont™ Corian® Authorized Fabricator. IGBC member ensuring sustainable practices.</p>
+                </div>
+                <div class="trust-card">
+                    <div class="trust-icon" aria-hidden="true">🛡️</div>
+                    <h3>Warranty Coverage</h3>
+                    <p>Comprehensive 10-year warranty on all installations. Coverage includes material defects, workmanship, and structural integrity.</p>
+                </div>
+                <div class="trust-card">
+                    <div class="trust-icon" aria-hidden="true">✓</div>
+                    <h3>Quality Inspection</h3>
+                    <p>Multi-point inspection at design, fabrication, and installation stages. Digital documentation and approval process for complete transparency.</p>
+                </div>
+                <div class="trust-card">
+                    <div class="trust-icon" aria-hidden="true">📍</div>
+                    <h3>Pan-India Service</h3>
+                    <p>Installation coverage across Mumbai, Delhi, Bangalore, and major metro cities. Dedicated project managers for seamless coordination.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quote Form Section -->
+        <section id="quote" class="quote-form-section">
+            <div class="quote-form-container">
+                <div style="text-align: center;">
+                    <h2 style="font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 300; margin-bottom: 1rem;">Get Your Custom Quote</h2>
+                    <p style="font-size: 1.1rem; margin-bottom: 0;">Share your project details and we'll provide a detailed quote within 24 hours.</p>
+                </div>
+
+                <form class="quote-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Full Name *</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="company">Company / Firm</label>
+                            <input type="text" id="company" name="company">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number *</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="project-type">Project Type *</label>
+                            <select id="project-type" name="project_type" required>
+                                <option value="">Select project type</option>
+                                <option value="countertops">Kitchen Countertops</option>
+                                <option value="cladding">Wall Cladding</option>
+                                <option value="furniture">Custom Furniture</option>
+                                <option value="fabrication">Fabrication Services</option>
+                                <option value="mixed">Multiple Services</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="city">City *</label>
+                            <input type="text" id="city" name="city" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="timeline">Project Timeline</label>
+                        <select id="timeline" name="timeline">
+                            <option value="">Select timeline</option>
+                            <option value="urgent">Within 1 month</option>
+                            <option value="soon">1-3 months</option>
+                            <option value="planning">3-6 months</option>
+                            <option value="future">6+ months</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="details">Project Details</label>
+                        <textarea id="details" name="details" placeholder="Tell us about your project requirements, dimensions, color preferences, etc."></textarea>
+                    </div>
+
+                    <div class="form-checkbox">
+                        <input type="checkbox" id="consent" name="consent" required>
+                        <label for="consent">I agree to receive communication from Concept By Realza regarding my quote and project. We respect your privacy and will not share your information.</label>
+                    </div>
+
+                    <button type="submit" class="form-submit">Submit Quote Request</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Portfolio Showcase -->
+        <section class="portfolio-section">
+            <div class="section-header">
+                <div class="section-eyebrow">INSPIRATION</div>
+                <h2 class="section-title">Our Craftsmanship in Action</h2>
+                <p class="section-description">Discover how we transform spaces with precision-crafted Corian surfaces. Each project showcases our commitment to excellence and attention to detail.</p>
+            </div>
+
+            <div class="portfolio-grid">
+                <div class="portfolio-item portfolio-large">
+                    <img src="https://github.com/user-attachments/assets/4f1ce530-6782-42ea-96a8-4c1c7ab7f3fb" alt="Premium Corian Installation" loading="lazy">
+                    <div class="portfolio-overlay">
+                        <h3>Premium Surfaces</h3>
+                        <p>Luxury Residential Project</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://github.com/user-attachments/assets/248e35e7-75eb-4901-be5e-5cf25b106bcb" alt="Modern Corian Design" loading="lazy">
+                    <div class="portfolio-overlay">
+                        <h3>Modern Elegance</h3>
+                        <p>Commercial Space</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Partners Section -->
+        <section id="partners" class="partners-section">
+            <div class="partners-content">
+                <div class="section-header">
+                    <div class="section-eyebrow">COLLABORATION</div>
+                    <h2 class="section-title">Partner With Excellence</h2>
+                    <p class="section-description">We collaborate with architects and designers to bring visionary projects to life. From concept to completion, we're your trusted manufacturing partner.</p>
+                </div>
+
+                <div class="partners-grid">
+                    <article class="partner-card">
+                        <div class="partner-icon" aria-hidden="true">📐</div>
+                        <h3>Design Support</h3>
+                        <p>Technical consultation, material selection guidance, and 3D visualization to refine your vision before fabrication begins.</p>
+                    </article>
+                    <article class="partner-card">
+                        <div class="partner-icon" aria-hidden="true">⚡</div>
+                        <h3>Fast Turnaround</h3>
+                        <p>Streamlined production workflows ensure project deadlines are met without compromising on quality or precision.</p>
+                    </article>
+                    <article class="partner-card">
+                        <div class="partner-icon" aria-hidden="true">🏆</div>
+                        <h3>Premium Quality</h3>
+                        <p>ISO-certified processes, material certifications, and rigorous testing guarantee products that exceed industry standards.</p>
+                    </article>
+                </div>
+
+                <div class="certifications">
+                    <h3>Certifications & Partnerships</h3>
+                    <div class="cert-badges">
+                        <span class="cert-badge">ISO 9001:2015 Certified</span>
+                        <span class="cert-badge">DuPont™ Corian® Authorized Fabricator</span>
+                        <span class="cert-badge">IGBC Member</span>
+                        <span class="cert-badge">Made in India</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <!-- Footer -->
     <footer id="contact">
         <div class="footer-content">
             <div class="footer-brand">
-                <img src="https://github.com/user-attachments/assets/b0755985-be3b-4210-a4c7-91851ea16342" alt="Concept By Realza" style="height: 40px; width: auto; margin-bottom: 1.5rem; filter: brightness(0) invert(1);">
+                <img src="https://github.com/user-attachments/assets/b0755985-be3b-4210-a4c7-91851ea16342" alt="Concept By Realza">
                 <p>Leading the future of architectural surfaces with precision manufacturing and innovative design solutions.</p>
                 <p style="margin-top: 2rem; font-size: 0.9rem;">📍 Manufacturing Units:<br>Mumbai | Delhi | Bangalore</p>
                 <p style="margin-top: 1rem;">📧 info@conceptbyrealza.com<br>📞 +91 88000 29291</p>
@@ -1750,8 +1980,8 @@
                 <ul class="footer-links">
                     <li><a href="#manufacturing">About Us</a></li>
                     <li><a href="#manufacturing">Manufacturing</a></li>
+                    <li><a href="#trust">Quality & Certifications</a></li>
                     <li><a href="#partners">Projects</a></li>
-                    <li><a href="#contact">Careers</a></li>
                 </ul>
             </div>
             <div class="footer-section">
@@ -1759,8 +1989,8 @@
                 <ul class="footer-links">
                     <li><a href="#contact">Contact</a></li>
                     <li><a href="#partners">Partner Program</a></li>
-                    <li><a href="#quote">Request Samples</a></li>
-                    <li><a href="#contact">Support</a></li>
+                    <li><a href="#quote">Request Quote</a></li>
+                    <li><a href="mailto:info@conceptbyrealza.com">Email Us</a></li>
                 </ul>
             </div>
         </div>
@@ -1771,7 +2001,18 @@
     </footer>
 
     <script>
-        // Custom Cursor - only on pointer devices
+        // Page Loader
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('pageLoader');
+            setTimeout(() => {
+                loader.classList.add('fade-out');
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                }, 600);
+            }, 2200);
+        });
+
+        // Custom Cursor
         const cursor = document.getElementById('cursor');
         let isPointerDevice = window.matchMedia('(pointer: fine) and (hover: hover)').matches;
         
@@ -1802,35 +2043,77 @@
             });
         }
 
-        // Mobile menu toggle
-        const menuToggle = document.querySelector('.menu-toggle');
-        const navLinks = document.querySelector('.nav-links');
+        // Mobile menu with overlay and escape key
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        const menuOverlay = document.getElementById('menuOverlay');
         
+        function closeMenu() {
+            navLinks.classList.remove('active');
+            menuToggle.classList.remove('active');
+            menuOverlay.classList.remove('active');
+            menuToggle.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = '';
+        }
+
+        function openMenu() {
+            navLinks.classList.add('active');
+            menuToggle.classList.add('active');
+            menuOverlay.classList.add('active');
+            menuToggle.setAttribute('aria-expanded', 'true');
+            document.body.style.overflow = 'hidden';
+        }
+
         menuToggle.addEventListener('click', () => {
-            const isActive = navLinks.classList.toggle('active');
-            menuToggle.classList.toggle('active');
-            menuToggle.setAttribute('aria-expanded', isActive);
-            document.body.style.overflow = isActive ? 'hidden' : '';
+            const isActive = navLinks.classList.contains('active');
+            isActive ? closeMenu() : openMenu();
+        });
+
+        menuOverlay.addEventListener('click', closeMenu);
+
+        // Close menu on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && navLinks.classList.contains('active')) {
+                closeMenu();
+            }
         });
 
         navLinks.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-                menuToggle.classList.remove('active');
-                menuToggle.setAttribute('aria-expanded', 'false');
-                document.body.style.overflow = '';
-            });
+            link.addEventListener('click', closeMenu);
         });
 
-        // Dropdown keyboard navigation
-        document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
-            toggle.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    const menu = toggle.nextElementSibling;
-                    const isVisible = window.getComputedStyle(menu).opacity === '1';
-                    menu.style.opacity = isVisible ? '0' : '1';
-                    menu.style.visibility = isVisible ? 'hidden' : 'visible';
+        // Fixed Dropdown Navigation
+        document.querySelectorAll('.dropdown').forEach(dd => {
+            const btn = dd.querySelector('.dropdown-toggle');
+            const menu = dd.querySelector('.dropdown-menu');
+
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                // Close other dropdowns
+                document.querySelectorAll('.dropdown').forEach(other => {
+                    if (other !== dd) {
+                        other.classList.remove('open');
+                        other.querySelector('.dropdown-toggle').setAttribute('aria-expanded', 'false');
+                    }
+                });
+                
+                const isOpen = dd.classList.toggle('open');
+                btn.setAttribute('aria-expanded', String(isOpen));
+            });
+
+            btn.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    dd.classList.remove('open');
+                    btn.setAttribute('aria-expanded', 'false');
+                    btn.focus();
+                }
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!dd.contains(e.target)) {
+                    dd.classList.remove('open');
+                    btn.setAttribute('aria-expanded', 'false');
                 }
             });
         });
@@ -1854,6 +2137,22 @@
                 ticking = true;
             }
         });
+
+        // Lazy-load background images
+        const bgObserver = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                const el = entry.target;
+                const src = el.getAttribute('data-bg');
+                if (src) {
+                    el.style.backgroundImage = `url('${src}')`;
+                    el.removeAttribute('data-bg');
+                }
+                obs.unobserve(el);
+            });
+        }, { rootMargin: '200px' });
+
+        document.querySelectorAll('[data-bg]').forEach(el => bgObserver.observe(el));
 
         // Intersection Observer for animations
         const observerOptions = {
@@ -1915,17 +2214,6 @@
                 }
             });
         }
-
-        // Page Loader
-        window.addEventListener('load', () => {
-            const loader = document.getElementById('pageLoader');
-            setTimeout(() => {
-                loader.classList.add('fade-out');
-                setTimeout(() => {
-                    loader.style.display = 'none';
-                }, 600);
-            }, 2200); // Wait for animation to complete
-        });
     </script>
 </body>
 </html>
